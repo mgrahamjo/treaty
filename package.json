@@ -1,0 +1,24 @@
+{
+  "name": "treaty",
+  "version": "0.0.1",
+  "description": "More than a promise.",
+  "main": "treaty.js",
+  "jsnext:main": "treaty.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mgrahamjo/treaty.git"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "keywords": [
+    "promise",
+    "async"
+  ],
+  "author": "Mike Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mgrahamjo/treaty/issues"
+  },
+  "homepage": "https://github.com/mgrahamjo/treaty#readme"
+}
