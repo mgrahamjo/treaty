@@ -2,30 +2,30 @@
 
 module.exports = callback => {
 
-    let isResolved,
-        treaty,
+    let treaty,
         results,
         catcher,
+        error,
         then;
 
     function resolve() {
         results = Array.prototype.slice.call(arguments);
         if (then) {
             then.apply(then, results);
-        } else {
-            isResolved = true;
         }
     }
 
-    function reject(error) {
+    function reject(err) {
         if (catcher) {
-            catcher(error);
+            catcher(err);
+        } else {
+            error = err;
         }
     }
 
     treaty = {
         then: handler => {
-            if (isResolved) {
+            if (results) {
                 handler.apply(handler, results);
             } else {
                 then = handler;
@@ -33,7 +33,11 @@ module.exports = callback => {
             return treaty;
         },
         'catch': handler => {
-            catcher = handler;
+            if (error) {
+                handler(error);
+            } else {
+                catcher = handler;
+            }
             return treaty;
         }
     };

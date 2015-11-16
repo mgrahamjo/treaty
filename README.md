@@ -1,6 +1,6 @@
 # Treaty
 
-You can think of a Treaty as an ES2015 Promise with one key difference: you can resolve a promise with multiple arguments.
+You can think of a treaty as a Promise with one key difference: you can resolve a treaty with multiple arguments.
 
 
 ```javascript
@@ -15,11 +15,13 @@ let test = treaty((resolve, reject) => {
 		if (error) {
 			reject(error);
 		} else {
+			// Resolve with any number of arguments:
 			resolve(data, message);
 		}
 	});
 });
 
+// Arguments get passed here:
 test.then((data, message) => {
 	console.log(message);
 	doSomethingWith(data);

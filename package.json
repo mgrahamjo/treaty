@@ -1,6 +1,6 @@
 {
   "name": "treaty",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "More than a promise.",
   "main": "treaty.js",
   "jsnext:main": "treaty.js",
