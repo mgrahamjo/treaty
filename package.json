@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git://github.com/mgrahamjo/treaty.git"
   },
+  "scripts": {
+    "test": "nodeunit test/test.js"
+  },
   "engines": {
     "node": ">=4.0.0"
   },
@@ -20,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/mgrahamjo/treaty/issues"
   },
-  "homepage": "https://github.com/mgrahamjo/treaty#readme"
+  "homepage": "https://github.com/mgrahamjo/treaty#readme",
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
+  }
 }
