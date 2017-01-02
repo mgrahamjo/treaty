@@ -1,9 +1,8 @@
 {
   "name": "treaty",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "More than a promise.",
   "main": "treaty.js",
-  "jsnext:main": "treaty.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/mgrahamjo/treaty.git"

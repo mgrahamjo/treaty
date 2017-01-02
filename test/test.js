@@ -1,4 +1,4 @@
-const treaty = require('../treaty');
+const treaty = require('../treaty.js');
 
 function asyncThing(one, two) {
 	return treaty(resolve => {

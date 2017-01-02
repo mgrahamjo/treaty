@@ -1,17 +1,15 @@
-'use strict';
+module.exports = callback => {
 
-module.exports = function (callback) {
-
-    var treaty = void 0,
-        results = void 0,
-        catcher = void 0,
-        error = void 0,
-        _then = void 0;
+    let treaty,
+        results,
+        catcher,
+        error,
+        then;
 
     function resolve() {
         results = Array.prototype.slice.call(arguments);
-        if (_then) {
-            _then.apply(_then, results);
+        if (then) {
+            then.apply(then, results);
         }
     }
 
@@ -24,15 +22,15 @@ module.exports = function (callback) {
     }
 
     treaty = {
-        then: function then(handler) {
+        then: handler => {
             if (results) {
                 handler.apply(handler, results);
             } else {
-                _then = handler;
+                then = handler;
             }
             return treaty;
         },
-        'catch': function _catch(handler) {
+        'catch': handler => {
             if (error) {
                 handler(error);
             } else {
