@@ -1,6 +1,6 @@
 # Treaty
 
-You can think of a treaty as a Promise with one key difference: you can resolve a treaty with multiple arguments.
+You can think of a treaty as a Promise with one key difference: you can resolve or reject a treaty with multiple arguments.
 
 
 ```javascript
@@ -13,9 +13,8 @@ let test = treaty((resolve, reject) => {
 	doSomethingAsync((error, data) => {
 		
 		if (error) {
-			reject(error);
+			reject(error, message);
 		} else {
-			// Resolve with any number of arguments:
 			resolve(data, message);
 		}
 	});
@@ -27,8 +26,9 @@ test.then((data, message) => {
 	doSomethingWith(data);
 });
 
-test.catch(error => {
-	console.error(error);
+test.catch((error, message) => {
+	console.error(message);
+	doSomethingElseWith(error);
 });
 ```
 
@@ -50,7 +50,8 @@ require('treaty')((resolve, reject) => {
 }).then((data, message) => {
 	console.log(message);
 	doSomethingWith(data);
-}).catch(error => {
-	console.error(error);
+}).catch((error, message) => {
+	console.error(message);
+	doSomethingElseWith(error);
 });
 ```

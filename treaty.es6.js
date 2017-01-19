@@ -1,46 +1,52 @@
 module.exports = callback => {
 
-    let treaty,
-        results,
-        catcher,
-        error,
-        then;
+    let treaty = (() => {
 
-    function resolve() {
-        results = Array.prototype.slice.call(arguments);
-        if (then) {
-            then.apply(then, results);
-        }
-    }
+        const error = {},
+            results = {},
+            handlers = {};
 
-    function reject(err) {
-        if (catcher) {
-            catcher(err);
-        } else {
-            error = err;
-        }
-    }
-
-    treaty = {
-        then: handler => {
-            if (results) {
-                handler.apply(handler, results);
+        function handleArgs(data, args, handler) {
+            data.value = Array.prototype.slice.call(args);
+            if (handlers[handler]) {
+                handlers[handler].apply(handlers[handler], data.value);
+                treaty = undefined;
             } else {
-                then = handler;
+                data.exists = true;
             }
-            return treaty;
-        },
-        'catch': handler => {
-            if (error) {
-                handler(error);
-            } else {
-                catcher = handler;
-            }
-            return treaty;
         }
-    };
 
-    callback(resolve, reject);
+        function handleHandler(data, thenOrCatch) {
+            return handler => {
+                if (data.exists) {
+                    handler.apply(handler, data.value);
+                    treaty = undefined;
+                } else {
+                    handlers[thenOrCatch] = handler;
+                }
+                return methods;
+            };
+        }
+
+        function resolve() {
+            handleArgs(results, arguments, 'then');
+        }
+
+        function reject() {
+            handleArgs(error, arguments, 'catch');
+        }
+
+        const methods = {
+            then: handleHandler(results, 'then'),
+            'catch': handleHandler(error, 'catch')
+        };
+
+        callback(resolve, reject);
+
+        return methods;
+
+    })();
 
     return treaty;
+
 };
